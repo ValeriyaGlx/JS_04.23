@@ -55,7 +55,7 @@ function getDelimiters(n){
 function getMatrix(){
   let simb = prompt('Enter any character set, no more than 3 characters and no less than 1.');
   let number = prompt('Enter valid number, only positive more than 0 and less than 10.');
-  if(simb.length > 3 || !simb.trim()){
+  if(simb.length > 3 || !simb.trim() || simb.includes(' ')){
     console.log("Incorrect input!");
     getMatrix();
     return;
