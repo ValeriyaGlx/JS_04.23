@@ -37,4 +37,35 @@ function selectFromInterval(arr, start, finish) {
   return res;
 }
 
+//task 3
+function createIterable(from, to) {
+  if (
+    typeof from !== "number" ||
+    typeof to !== "number" ||
+    !Number.isFinite(from) ||
+    !Number.isFinite(to) ||
+    from >= to
+  ) {
+    throw new Error();
+  }
+  return {
+    [Symbol.iterator]() {
+      let current = from;
 
+      return {
+        next() {
+          if (current <= to) {
+            return {
+              value: current++,
+              done: false,
+            };
+          } else {
+            return {
+              done: true,
+            };
+          }
+        },
+      };
+    },
+  };
+}
