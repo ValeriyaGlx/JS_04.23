@@ -18,7 +18,6 @@ function createDebounceFunction(callback, delay) {
   let time;
   return function (...arguments) {
     clearTimeout(time);
-    const context = this;
-    time = setTimeout(() => callback.call(context, arguments), delay);
+    time = setTimeout(() => callback.call(this, arguments), delay);
   };
 }
