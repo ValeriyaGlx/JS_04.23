@@ -64,7 +64,7 @@ class Stack {
       throw new Error("Not iterable");
     }
 
-    let newStack = new Stack(iterable.length || iterable.size);
+    const newStack = new Stack(iterable.length || iterable.size);
 
     if (iterable.length) {
       for (let key in iterable) {
@@ -72,12 +72,102 @@ class Stack {
         newStack.storage[size] = iterable[key];
       }
     } else {
-      for (let key of iterable.values() || iterable) {
+      for (let key of iterable.values()) {
         let size = newStack.size++;
         newStack.storage[size] = key;
       }
     }
 
     return newStack;
+  }
+}
+
+//task 2
+
+class ListNode {
+  constructor(x) {
+    this.element = x;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(elem) {
+    const node = new ListNode(elem);
+    let currentNode;
+
+    if (this.head === null) {
+      this.head = node;
+    } else {
+      currentNode = this.head;
+
+      while (currentNode.next) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = node;
+    }
+  }
+
+  prepend(elem) {
+    const node = new ListNode(elem);
+    if (this.head === null) {
+      this.head = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
+    }
+  }
+
+  find(elem) {
+    if (this.head === null) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.element === elem) {
+        return elem;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+
+  toArray() {
+    const arr = [];
+    let currentNode = this.head;
+
+    while (currentNode) {
+      arr.push(currentNode.element);
+      currentNode = currentNode.next;
+    }
+    return arr;
+  }
+
+  static fromIterable(iterable) {
+    try {
+      for (let key of iterable) {
+        break;
+      }
+    } catch {
+      throw new Error("Not iterable");
+    }
+
+    const newList = new LinkedList();
+    if (iterable.length) {
+      for (let key in iterable) {
+        newList.append(iterable[key]);
+      }
+    } else {
+      for (let key of iterable.values()) {
+        newList.append(key);
+      }
+    }
+    return newList;
   }
 }
