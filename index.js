@@ -68,6 +68,13 @@ class Calculator {
       return;
     }
 
+    if(!this.currentNumber){
+      this.currentNumber = this.preveousNumber;
+      this.preveousNumber = '';
+      this.sing = '';
+      return
+    }
+
     console.log(prev, this.sing, current);
     switch (this.sing) {
       case "+":
@@ -96,11 +103,8 @@ class Calculator {
     if(this.currentNumber.endsWith('.')){
       this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
     }
-    console.log(this.currentNumber);
-
     this.preveousNumber = '';
     this.sing = '';
-    console.log(this.currentNumber + "");
   }
 
   showOnScreen(res, form) {
