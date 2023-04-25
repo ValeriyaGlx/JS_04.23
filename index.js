@@ -12,7 +12,18 @@ class Calculator {
     this.sing = "";
   }
 
-  deleteOne() {}
+  deleteOne() {
+    if (this.currentNumber === "" && this.preveousNumber === "") {
+      return;
+    }
+    this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
+
+    if(this.currentNumber === '' && this.sing==='' && this.preveousNumber===''){
+      this.currentNumber = "0";
+    }
+
+    this.showOnScreen(result, formula);
+  }
 
   appendNumber(number) {
     if (
@@ -56,9 +67,18 @@ class Calculator {
     if (this.sing && this.preveousNumber && this.currentNumber) {
       this.calculate()
     }
+   
     this.sing = sing;
     this.preveousNumber = this.currentNumber;
     this.currentNumber = "";
+  }
+
+  switch(){
+    if (this.currentNumber === "" || this.currentNumber === "0") {
+      return;
+    }
+    this.currentNumber = -this.currentNumber + '';
+    this.showOnScreen(result, formula);
   }
 
   calculate() {
@@ -78,10 +98,10 @@ class Calculator {
     console.log(prev, this.sing, current);
     switch (this.sing) {
       case "+":
-        this.currentNumber = current + prev;
+        this.currentNumber = (current + prev).toFixed(8);
         break;
       case "-":
-        this.currentNumber = prev - current;
+        this.currentNumber = (prev - current).toFixed(8);
         break;
       case "/":
         if(current === 0){
@@ -89,17 +109,19 @@ class Calculator {
             this.currentNumber = ''
             return;
         }
-        this.currentNumber = (prev / current).toFixed(10);
+        this.currentNumber = (prev / current).toFixed(8);
         break;
       case "x":
-        this.currentNumber = (current * prev).toFixed(10);
+        this.currentNumber = (current * prev).toFixed(8);
         break;
 
       default:
         return;
     }
     this.currentNumber = this.currentNumber + '';
+    if(this.currentNumber !== '0'){
     this.currentNumber = this.currentNumber.replace(/0*$/,"")
+    }
     if(this.currentNumber.endsWith('.')){
       this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
     }
@@ -121,15 +143,19 @@ const calculator = new Calculator();
 
 const buttonsNumber = document.querySelectorAll(".numberButton");
 const buttonsSign = document.querySelectorAll(".signButton");
+const changeOperand = document.querySelector(".changeOperand");
 const equal = document.querySelector(".equal");
 const formula = document.querySelector(".formula");
 const result = document.querySelector(".result");
 const AC = document.querySelector(".clearAll");
+const deleteButton = document.querySelector(".delete")
 
 buttonsNumber.forEach((el) => el.addEventListener("click", addValue));
 buttonsSign.forEach((el) => el.addEventListener("click", addSign));
 equal.addEventListener("click", getEqually);
 AC.addEventListener("click", clearAll);
+changeOperand.addEventListener("click", switchOperand);
+deleteButton.addEventListener("click", deleteOne)
 
 function addValue(e) {
   const key = e.target.textContent;
@@ -152,4 +178,12 @@ function clearAll() {
   formula.textContent = "";
   result.textContent = "";
   calculator.allClear();
+}
+
+function switchOperand(){
+calculator.switch();
+}
+
+function deleteOne(){
+  calculator.deleteOne();
 }
