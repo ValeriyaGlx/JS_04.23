@@ -1,16 +1,18 @@
-body{
+body {
     width: 100%;
     background-color: #e0dede;
 }
-*, *::after, *::before{
+
+*, *::after, *::before {
     box-sizing: border-box;
     margin: 0;
 	padding: 0;
 }
-.calc{
+
+.calc {
    font-family: Arial, Helvetica, sans-serif;
    width: 350px;
-   height: 500px;
+   height: 520px;
    margin: 100px auto;
    padding: 30px;
    background-color: #181818;
@@ -18,6 +20,7 @@ body{
    border-radius: 20px;
    box-shadow: 0px 0px 4px #4f4f4f;
 }
+
 .calc-screen {
     text-align: right;
     padding: 8px;
@@ -25,23 +28,28 @@ body{
     margin-bottom: 30px;
     border-radius: 16px;
 }
-.formula{
+
+.formula {
     font-size: 20px;
     height: 30px;
 }
+
 .result {
     height: 30px;
     font-size: 34px;
 }
+
 .calc-buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 7px;
 }
+
 .calc-buttons button {
     width: 50px;
     height: 50px;
+    margin: 0 auto;
     border-radius: 50%;
     border: none;
     background-color: #181818d8;
@@ -50,14 +58,38 @@ body{
     font-size: 18px;
     cursor: pointer;
 }
-.calc-buttons button:hover{
-    transform: scale(0.93);
+
+.calc-buttons button:hover {
+    transform: scale(0.92);
     box-shadow: 0px 0px 3px #838181;
     transition: all .4 ease-in-out;
 }
-.calc-buttons .giveRed{
+
+.calc-buttons .giveRed {
     color: #EB6666;
 }
-.calc-buttons .giveBlue{
+
+.calc-buttons .giveBlue {
     color: #26fed69b;
+}
+
+.brackets {
+    width: 150px;
+    height: 50px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 30px;
+    border: none;
+    background-color: #181818d8;
+    box-shadow: 0px 0px 1.5px #838181;
+    color: #e0dede;
+    font-size: 18px;
+    cursor: pointer;
+    color: #EB6666;
+}
+
+.brackets:hover {
+    transform: scale(0.96);
+    box-shadow: 0px 0px 3px #838181;
+    transition: all .4 ease-in-out;
 }
