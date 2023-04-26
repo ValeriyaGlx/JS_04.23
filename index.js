@@ -87,6 +87,10 @@ class Calculator {
       this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
     }
 
+    if(this.currentNumber.endsWith('0')){
+      this.currentNumber = parseFloat(this.currentNumber) + "";
+    }
+
     if(this.currentNumber=== "-0"){
       this.currentNumber= "0"
     }
