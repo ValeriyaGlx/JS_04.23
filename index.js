@@ -10,7 +10,7 @@ class Calculator {
     this.currentNumber = "0";
     this.sing = "";
 
-    this.showOnScreen(result, formula)
+    this.showOnScreen(result, formula);
   }
 
   deleteOne() {
@@ -78,8 +78,9 @@ class Calculator {
   }
 
   appendSing(sing) {
-    if (this.currentNumber === "" && this.preveousNumber === "" ||
-    this.currentNumber === "-" && this.preveousNumber === ""
+    if (
+      (this.currentNumber === "" && this.preveousNumber === "") ||
+      (this.currentNumber === "-" && this.preveousNumber === "")
     ) {
       return;
     }
@@ -88,6 +89,10 @@ class Calculator {
       return;
     }
     if (this.sing && this.preveousNumber && this.currentNumber) {
+      if(parseFloat(this.currentNumber) === 0){
+        this.calculate();
+        return;
+      }
       this.calculate();
     }
 
@@ -112,14 +117,8 @@ class Calculator {
       return;
     }
 
-    if (
-      parseFloat(this.currentNumber) === 0 &&
-      this.currentNumber.startsWith("-")
-    ) {
-      this.currentNumber = this.currentNumber.substring(
-        1,
-        this.currentNumber.length
-      );
+    if (this.currentNumber.startsWith("-")) {
+      this.currentNumber = this.currentNumber.substring(1,this.currentNumber.length);
       this.showOnScreen(result, formula);
       return;
     }
@@ -129,8 +128,7 @@ class Calculator {
       this.showOnScreen(result, formula);
       return;
     }
-
-    this.currentNumber = -this.currentNumber + "";
+    this.currentNumber = "-" + this.currentNumber;
     this.showOnScreen(result, formula);
   }
 
