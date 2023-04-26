@@ -184,8 +184,9 @@ class Calculator {
       );
     }
     if (this.currentNumber.length > 14) {
-      this.currentNumber = this.currentNumber.substring(0, 15);
+     this.currentNumber = (+this.currentNumber).toPrecision(2) + '';
     }
+
     this.preveousNumber = "";
     this.sing = "";
   }
