@@ -29,6 +29,10 @@ class Calculator {
       this.currentNumber = "0";
     }
 
+    if(this.currentNumber.includes('e')){
+      this.currentNumber = '0';
+    }
+
     this.showOnScreen(result, formula);
   }
 
