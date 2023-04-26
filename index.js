@@ -75,6 +75,9 @@ class Calculator {
       alert("number is too long");
       return;
     }
+    if(this.currentNumber.includes('e')){
+      return;
+    }
 
     this.currentNumber = this.currentNumber + number;
   }
