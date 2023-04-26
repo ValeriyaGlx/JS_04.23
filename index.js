@@ -3,7 +3,6 @@ class Calculator {
     this.preveousNumber = preveousNumber || "";
     this.currentNumber = currentNumber || "";
     this.sing = "";
-    this.finish = false;
   }
 
   allClear() {
@@ -16,9 +15,14 @@ class Calculator {
     if (this.currentNumber === "" && this.preveousNumber === "") {
       return;
     }
-    this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
 
-    if(this.currentNumber === '' && this.sing==='' && this.preveousNumber===''){
+    this.currentNumber = this.currentNumber.substring( 0, this.currentNumber.length - 1);
+
+    if (
+      this.currentNumber === "" &&
+      this.sing === "" &&
+      this.preveousNumber === ""
+    ) {
       this.currentNumber = "0";
     }
 
@@ -48,11 +52,22 @@ class Calculator {
     if (this.currentNumber === "0") {
       this.currentNumber = "";
     }
-    if (this.currentNumber.length > 14) {
-        console.log('>14');
-      return;
-      //think
+    if(this.currentNumber === "-" && number === "0" ||
+       this.currentNumber === "-" && number === "." ||
+       this.currentNumber === "-" && number === "00"
+       ){
+      number = "0."
     }
+    if(this.currentNumber === "-0"){
+      this.currentNumber = '';
+      number = -number;
+    }
+
+    if (this.currentNumber.length > 14) {
+      alert("number is too long");
+      return;
+    }
+
     this.currentNumber = this.currentNumber + number;
   }
 
@@ -65,37 +80,44 @@ class Calculator {
       return;
     }
     if (this.sing && this.preveousNumber && this.currentNumber) {
-      this.calculate()
+      this.calculate();
     }
-   
+
+    if(this.currentNumber.endsWith('.')){
+      this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
+    }
+
+    if(this.currentNumber=== "-0"){
+      this.currentNumber= "0"
+    }
+
     this.sing = sing;
     this.preveousNumber = this.currentNumber;
     this.currentNumber = "";
   }
 
-  switch(){
+  switch() {
     if (this.currentNumber === "" || this.currentNumber === "0") {
       return;
     }
-    this.currentNumber = -this.currentNumber + '';
+    this.currentNumber = -this.currentNumber + "";
     this.showOnScreen(result, formula);
   }
 
   calculate() {
     let current = parseFloat(this.currentNumber);
-    let prev = parseFloat(this.preveousNumber)
+    let prev = parseFloat(this.preveousNumber);
     if (this.currentNumber === "" && this.preveousNumber === "") {
       return;
     }
 
-    if(!this.currentNumber){
+    if (!this.currentNumber) {
       this.currentNumber = this.preveousNumber;
-      this.preveousNumber = '';
-      this.sing = '';
-      return
+      this.preveousNumber = "";
+      this.sing = "";
+      return;
     }
 
-    console.log(prev, this.sing, current);
     switch (this.sing) {
       case "+":
         this.currentNumber = (current + prev).toFixed(8);
@@ -104,10 +126,10 @@ class Calculator {
         this.currentNumber = (prev - current).toFixed(8);
         break;
       case "/":
-        if(current === 0){
-            alert('you can’t divide by zero');
-            this.currentNumber = ''
-            return;
+        if (current === 0) {
+          alert("you can’t divide by zero");
+          this.currentNumber = "";
+          return;
         }
         this.currentNumber = (prev / current).toFixed(8);
         break;
@@ -118,15 +140,21 @@ class Calculator {
       default:
         return;
     }
-    this.currentNumber = this.currentNumber + '';
-    if(this.currentNumber !== '0'){
-    this.currentNumber = this.currentNumber.replace(/0*$/,"")
+    this.currentNumber = this.currentNumber + "";
+    if (this.currentNumber !== "0") {
+      this.currentNumber = this.currentNumber.replace(/0*$/, "");
     }
-    if(this.currentNumber.endsWith('.')){
-      this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
+    if (this.currentNumber.endsWith(".")) {
+      this.currentNumber = this.currentNumber.substring(
+        0,
+        this.currentNumber.length - 1
+      );
     }
-    this.preveousNumber = '';
-    this.sing = '';
+    if (this.currentNumber.length > 14) {
+      this.currentNumber = this.currentNumber.substring(0, 15);
+    }
+    this.preveousNumber = "";
+    this.sing = "";
   }
 
   showOnScreen(res, form) {
@@ -148,14 +176,14 @@ const equal = document.querySelector(".equal");
 const formula = document.querySelector(".formula");
 const result = document.querySelector(".result");
 const AC = document.querySelector(".clearAll");
-const deleteButton = document.querySelector(".delete")
+const deleteButton = document.querySelector(".delete");
 
 buttonsNumber.forEach((el) => el.addEventListener("click", addValue));
 buttonsSign.forEach((el) => el.addEventListener("click", addSign));
 equal.addEventListener("click", getEqually);
 AC.addEventListener("click", clearAll);
 changeOperand.addEventListener("click", switchOperand);
-deleteButton.addEventListener("click", deleteOne)
+deleteButton.addEventListener("click", deleteOne);
 
 function addValue(e) {
   const key = e.target.textContent;
@@ -171,7 +199,7 @@ function addSign(e) {
 
 function getEqually() {
   calculator.calculate();
-  calculator.showOnScreen(result,formula)
+  calculator.showOnScreen(result, formula);
 }
 
 function clearAll() {
@@ -180,10 +208,10 @@ function clearAll() {
   calculator.allClear();
 }
 
-function switchOperand(){
-calculator.switch();
+function switchOperand() {
+  calculator.switch();
 }
 
-function deleteOne(){
+function deleteOne() {
   calculator.deleteOne();
 }
