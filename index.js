@@ -87,7 +87,7 @@ class Calculator {
       return;
     }
     if (this.sing && this.preveousNumber && this.currentNumber) {
-      if (parseFloat(this.currentNumber) === 0) {
+      if (parseFloat(this.currentNumber) === 0 && this.sing==="/") {
         this.calculate();
         return;
       }
