@@ -7,8 +7,10 @@ class Calculator {
 
   allClear() {
     this.preveousNumber = "";
-    this.currentNumber = "";
+    this.currentNumber = "0";
     this.sing = "";
+
+    this.showOnScreen(result, formula)
   }
 
   deleteOne() {
@@ -16,7 +18,10 @@ class Calculator {
       return;
     }
 
-    this.currentNumber = this.currentNumber.substring( 0, this.currentNumber.length - 1);
+    this.currentNumber = this.currentNumber.substring(
+      0,
+      this.currentNumber.length - 1
+    );
 
     if (
       this.currentNumber === "" &&
@@ -52,14 +57,15 @@ class Calculator {
     if (this.currentNumber === "0") {
       this.currentNumber = "";
     }
-    if(this.currentNumber === "-" && number === "0" ||
-       this.currentNumber === "-" && number === "." ||
-       this.currentNumber === "-" && number === "00"
-       ){
-      number = "0."
+    if (
+      (this.currentNumber === "-" && number === "0") ||
+      (this.currentNumber === "-" && number === ".") ||
+      (this.currentNumber === "-" && number === "00")
+    ) {
+      number = "0.";
     }
-    if(this.currentNumber === "-0"){
-      this.currentNumber = '';
+    if (this.currentNumber === "-0") {
+      this.currentNumber = "";
       number = -number;
     }
 
@@ -72,7 +78,9 @@ class Calculator {
   }
 
   appendSing(sing) {
-    if (this.currentNumber === "" && this.preveousNumber === "") {
+    if (this.currentNumber === "" && this.preveousNumber === "" ||
+    this.currentNumber === "-" && this.preveousNumber === ""
+    ) {
       return;
     }
     if (this.sing && sing && this.preveousNumber && !this.currentNumber) {
@@ -83,11 +91,14 @@ class Calculator {
       this.calculate();
     }
 
-    if(this.currentNumber.endsWith('.')){
-      this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length-1)
+    if (this.currentNumber.endsWith(".")) {
+      this.currentNumber = this.currentNumber.substring(
+        0,
+        this.currentNumber.length - 1
+      );
     }
 
-    if(this.currentNumber.endsWith('0')){
+    if (this.currentNumber.endsWith("0")) {
       this.currentNumber = parseFloat(this.currentNumber) + "";
     }
 
@@ -101,16 +112,22 @@ class Calculator {
       return;
     }
 
-    if(parseFloat(this.currentNumber) === 0 && this.currentNumber.startsWith('-')){
-      this.currentNumber = this.currentNumber.substring(1, this.currentNumber.length);
+    if (
+      parseFloat(this.currentNumber) === 0 &&
+      this.currentNumber.startsWith("-")
+    ) {
+      this.currentNumber = this.currentNumber.substring(
+        1,
+        this.currentNumber.length
+      );
       this.showOnScreen(result, formula);
-      return
+      return;
     }
 
-    if(parseFloat(this.currentNumber) === 0){
-    this.currentNumber = '-' + this.currentNumber;
-    this.showOnScreen(result, formula);
-    return
+    if (parseFloat(this.currentNumber) === 0) {
+      this.currentNumber = "-" + this.currentNumber;
+      this.showOnScreen(result, formula);
+      return;
     }
 
     this.currentNumber = -this.currentNumber + "";
@@ -131,7 +148,7 @@ class Calculator {
       return;
     }
 
-    if(this.currentNumber === '-'){
+    if (this.currentNumber === "-") {
       return;
     }
 
