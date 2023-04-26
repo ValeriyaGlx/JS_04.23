@@ -7,10 +7,8 @@ class Calculator {
 
   allClear() {
     this.preveousNumber = "";
-    this.currentNumber = "0";
+    this.currentNumber = "";
     this.sing = "";
-
-    this.showOnScreen(result, formula);
   }
 
   deleteOne() {
@@ -89,7 +87,7 @@ class Calculator {
       return;
     }
     if (this.sing && this.preveousNumber && this.currentNumber) {
-      if(parseFloat(this.currentNumber) === 0){
+      if (parseFloat(this.currentNumber) === 0) {
         this.calculate();
         return;
       }
@@ -118,7 +116,10 @@ class Calculator {
     }
 
     if (this.currentNumber.startsWith("-")) {
-      this.currentNumber = this.currentNumber.substring(1,this.currentNumber.length);
+      this.currentNumber = this.currentNumber.substring(
+        1,
+        this.currentNumber.length
+      );
       this.showOnScreen(result, formula);
       return;
     }
