@@ -11,7 +11,7 @@ body {
 
 .calc {
    font-family: Arial, Helvetica, sans-serif;
-   width: 350px;
+   width: 360px;
    height: 520px;
    margin: 100px auto;
    padding: 30px;
@@ -23,7 +23,7 @@ body {
 
 .calc-screen {
     text-align: right;
-    padding: 8px;
+    padding-right: 2px;
     padding-top: 30px;
     margin-bottom: 30px;
     border-radius: 16px;
@@ -43,12 +43,12 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    grid-gap: 7px;
+    grid-gap: 11px;
 }
 
 .calc-buttons button {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto;
     border-radius: 50%;
     border: none;
@@ -71,25 +71,4 @@ body {
 
 .calc-buttons .giveBlue {
     color: #26fed69b;
-}
-
-.brackets {
-    width: 150px;
-    height: 50px;
-    display: block;
-    margin: 10px auto;
-    border-radius: 30px;
-    border: none;
-    background-color: #181818d8;
-    box-shadow: 0px 0px 1.5px #838181;
-    color: #e0dede;
-    font-size: 18px;
-    cursor: pointer;
-    color: #EB6666;
-}
-
-.brackets:hover {
-    transform: scale(0.96);
-    box-shadow: 0px 0px 3px #838181;
-    transition: all .4 ease-in-out;
 }
