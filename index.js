@@ -91,10 +91,6 @@ class Calculator {
       this.currentNumber = parseFloat(this.currentNumber) + "";
     }
 
-    if(this.currentNumber=== "-0"){
-      this.currentNumber= "0"
-    }
-
     this.sing = sing;
     this.preveousNumber = this.currentNumber;
     this.currentNumber = "";
@@ -104,6 +100,13 @@ class Calculator {
     if (this.currentNumber === "" || this.currentNumber === "0") {
       return;
     }
+
+    if(parseFloat(this.currentNumber) === 0){
+    this.currentNumber = "-" + this.currentNumber;
+    this.showOnScreen(result, formula);
+    return
+    }
+
     this.currentNumber = -this.currentNumber + "";
     this.showOnScreen(result, formula);
   }
